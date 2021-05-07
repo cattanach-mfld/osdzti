@@ -1,0 +1,12 @@
+[cctk]
+AdminSetupLockout=Enabled
+BootOrder=uefitype,uefi
+LegacyOrom=Disabled
+SecureBoot=Enabled
+TpmSecurity=Enabled
+tpm=On
+TpmActivation=Enabled
+tpmppidpo=Enabled
+TpmPpiPo=Enabled
+UefiBootPathSecurity=AlwaysExceptInternalHdd
+UefiNwStack=Enabled
