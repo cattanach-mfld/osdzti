@@ -10,13 +10,13 @@ Write-Host  -ForegroundColor Cyan "Enter BIOS Password"
 $passwd = Read-Host -AsSecureString 'Password'
 
 #Dell BIOS Config
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdztd/main/DellConfigure.zip" -OutFile "C:\OSDCloud\DellConfigure.zip"
-Expand-Archive "C:\OSDCloud\DellConfigure.zip" "C:\OSDCloud"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdzti/main/DellConfigure.zip" -OutFile "X:\OSDCloud\DellConfigure.zip"
+Expand-Archive "X:\OSDCloud\DellConfigure.zip" "X:\OSDCloud"
 
 $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
 
-& "C:\OSDCloud\DellConfigure\cctk.exe" --setuppwd=$password
-& "C:\OSDCloud\DellConfigure\cctk.exe" -i "C:\OSDCloud\DellConfigure\multiplatform_201906070913.cctk" --valsetuppwd=$password
+& "X:\OSDCloud\DellConfigure\cctk.exe" --setuppwd=$password
+& "X:\OSDCloud\DellConfigure\cctk.exe" -i "X:\OSDCloud\DellConfigure\multiplatform_201906070913.cctk" --valsetuppwd=$password
 
 #Make sure I have the latest OSD Content
 #Write-Host  -ForegroundColor Cyan "Updating the awesome OSD PowerShell Module"
