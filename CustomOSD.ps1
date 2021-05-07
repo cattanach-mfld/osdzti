@@ -9,6 +9,15 @@ Start-Sleep -Seconds 1
 Write-Host  -ForegroundColor Cyan "Enter BIOS Password"
 $passwd = Read-Host -AsSecureString 'Password'
 
+#Dell BIOS Config
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdztd/main/DellConfigure.zip" -OutFile "C:\OSDCloud\DellConfigure.zip"
+Expand-Archive "C:\OSDCloud\DellConfigure.zip" "C:\OSDCloud"
+
+$password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
+
+& "C:\OSDCloud\DellConfigure\cctk.exe" --setuppwd=$password
+& "C:\OSDCloud\DellConfigure\cctk.exe" -i "C:\OSDCloud\DellConfigure\multiplatform_201906070913.cctk" --valsetuppwd=$password
+
 #Make sure I have the latest OSD Content
 #Write-Host  -ForegroundColor Cyan "Updating the awesome OSD PowerShell Module"
 #Install-Module OSD -Force
@@ -20,15 +29,6 @@ $passwd = Read-Host -AsSecureString 'Password'
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
 Write-Host  -ForegroundColor Cyan "OSLanguage en-us OSBuild 20H2 OSEdition Education ZTI"
 Start-OSDCloud -OSLanguage en-us -OSBuild 20H2 -OSEdition Education -ZTI
-
-#Dell BIOS Config
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdztd/main/DellConfigure.zip" -OutFile "C:\OSDCloud\DellConfigure.zip"
-Expand-Archive "C:\OSDCloud\DellConfigure.zip" "C:\OSDCloud"
-
-$password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
-
-& "C:\OSDCloud\DellConfigure\cctk.exe" --setuppwd=$password
-& "C:\OSDCloud\DellConfigure\cctk.exe" -i "C:\OSDCloud\DellConfigure\multiplatform_201906070913.cctk" --valsetuppwd=$password
 
 #Restart from WinPE
 Write-Host  -ForegroundColor Cyan "Restarting in 15 seconds!"
