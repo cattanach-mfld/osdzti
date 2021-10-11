@@ -29,7 +29,7 @@ $password = ((New-Object System.Management.Automation.PSCredential('dummy',$pass
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
 Write-Host  -ForegroundColor Cyan "OSLanguage en-us OSBuild 21H2 OSEdition Education ZTI"
 #Start-OSDCloud -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-Start-OSDCloudGUI -OSLanguage en-us -OSBuild 21H2 -OSEdition Education
+Start-OSDCloudGUI
 
 #Restart from WinPE
 Write-Host  -ForegroundColor Cyan "Restarting in 15 seconds!"
