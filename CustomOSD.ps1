@@ -3,7 +3,7 @@
 [console]::BufferWidth=[console]::WindowWidth
 
 Write-Host  -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
-Start-Sleep -Seconds 1
+#Start-Sleep -Seconds 1
 
 #Prompt for BIOS Password
 Write-Host  -ForegroundColor Cyan "Enter BIOS Password"
@@ -27,12 +27,12 @@ $password = ((New-Object System.Management.Automation.PSCredential('dummy',$pass
 
 #Start OSDCloud ZTI the RIGHT way
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
-Write-Host  -ForegroundColor Cyan "OSLanguage en-us OSBuild 21H2 OSEdition Education ZTI"
+Write-Host  -ForegroundColor Cyan "Windows 11 OSLanguage en-us OSBuild 21H2 OSEdition Education"
 #Start-OSDCloud -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-#Start-OSDCloudGUI
-Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Education -ZTI
+Start-OSDCloudGUI
+#Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Education -ZTI
 
 #Restart from WinPE
-Write-Host  -ForegroundColor Cyan "Restarting in 15 seconds!"
-Start-Sleep -Seconds 15
+#Write-Host  -ForegroundColor Cyan "Restarting in 15 seconds!"
+#Start-Sleep -Seconds 15
 wpeutil reboot
