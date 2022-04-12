@@ -1633,8 +1633,8 @@ Write-Host  -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 #Start-Sleep -Seconds 1
 
 #Prompt for BIOS Password
-Write-Host  -ForegroundColor Cyan "Enter BIOS Password"
-$passwd = Read-Host -AsSecureString 'Password'
+#Write-Host  -ForegroundColor Cyan "Enter BIOS Password"
+#$passwd = Read-Host -AsSecureString 'Password'
 
 #Dell BIOS Config
 #Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdzti/main/DellConfigure.zip" -OutFile "X:\OSDCloud\DellConfigure.zip"
