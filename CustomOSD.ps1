@@ -1632,9 +1632,9 @@ exit
     #=================================================
 }
 
-[console]::WindowWidth=120
-[console]::WindowHeight=50
-[console]::BufferWidth=[console]::WindowWidth
+#[console]::WindowWidth=120
+#[console]::WindowHeight=50
+#[console]::BufferWidth=[console]::WindowWidth
 
 Write-Host  -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 #Start-Sleep -Seconds 1
