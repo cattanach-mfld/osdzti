@@ -1,8 +1,8 @@
 $reply = Read-Host "Windows 11?[y/n]"
 if ( $reply -match "[yY]" ) { 
-    $mfldwinver = "Windows 11")
+    $mfldwinver = "Windows 11"
 } else {
-    $mfldwinver = "Windows 10")
+    $mfldwinver = "Windows 10"
 }
 
 function Start-OSDCloudMFLD {
