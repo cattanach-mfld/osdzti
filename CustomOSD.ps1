@@ -1,3 +1,10 @@
+$reply = Read-Host -Prompt "Windows 11?[y/n]"
+if ( $reply -match "[yY]" ) { 
+    $mfldwinver = "Windows 11")
+} else {
+    $mfldwinver = "Windows 10")
+}
+
 function Start-OSDCloudMFLD {
     <#
     .SYNOPSIS
@@ -1656,7 +1663,8 @@ Write-Host  -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
 #Write-Host  -ForegroundColor Cyan "Windows 11 OSLanguage en-us OSBuild 21H2 OSEdition Education"
 #Start-OSDCloudMFLD -OSVersion 'Windows 11' -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-Start-OSDCloudMFLD -OSVersion 'Windows 10' -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
+#Start-OSDCloudMFLD -OSVersion 'Windows 10' -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
+Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
 #Start-OSDCloudGUI
 #Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Education -ZTI
 
