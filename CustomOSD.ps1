@@ -1671,4 +1671,4 @@ Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdi
 #Restart from WinPE
 #Write-Host  -ForegroundColor Cyan "Restarting in 15 seconds!"
 #Start-Sleep -Seconds 15
-#wpeutil reboot
+wpeutil reboot
