@@ -1,4 +1,4 @@
-$mfldwinver = "Windows 11"
+$mfldwinver = "Windows 10"
 #$reply = Read-Host "Windows 11?[y/n]"
 #if ( $reply -match "[yY]" ) { 
 #    $mfldwinver = "Windows 11"
