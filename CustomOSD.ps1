@@ -1669,6 +1669,13 @@ Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdi
 #Start-OSDCloudGUI
 #Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Education -ZTI
 
+if (Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' -and $_.Class -eq 'DiskDrive' }) {
+    Write-Warning "Press Remove Flash Drive"
+    while (Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' -and $_.Class -eq 'DiskDrive' }) {
+        Start-Sleep -Seconds 2
+    }
+}
+
 #Restart from WinPE
 #Write-Host  -ForegroundColor Cyan "Restarting in 15 seconds!"
 #Start-Sleep -Seconds 15
