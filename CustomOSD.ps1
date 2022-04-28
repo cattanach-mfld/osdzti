@@ -1669,9 +1669,9 @@ Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdi
 #Start-OSDCloudGUI
 #Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Education -ZTI
 
-if (Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' -and $_.Class -eq 'DiskDrive' }) {
+if (Get-Volume.usb) {
     Write-Warning "Press Remove Flash Drive"
-    while (Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -match '^USB' -and $_.Class -eq 'DiskDrive' }) {
+    while (Get-Volume.usb) {
         Start-Sleep -Seconds 2
     }
 }
