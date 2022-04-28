@@ -1665,7 +1665,8 @@ Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
 #Write-Host  -ForegroundColor Cyan "Windows 11 OSLanguage en-us OSBuild 21H2 OSEdition Education"
 #Start-OSDCloudMFLD -OSVersion 'Windows 11' -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
 #Start-OSDCloudMFLD -OSVersion 'Windows 10' -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
+#Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
+Start-OSDCloudMFLD -FindImageFile
 #Start-OSDCloudGUI
 #Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Education -ZTI
 
