@@ -1662,13 +1662,8 @@ Write-Host  -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 
 #Start OSDCloud ZTI the RIGHT way
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
-#Write-Host  -ForegroundColor Cyan "Windows 11 OSLanguage en-us OSBuild 21H2 OSEdition Education"
-#Start-OSDCloudMFLD -OSVersion 'Windows 11' -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-#Start-OSDCloudMFLD -OSVersion 'Windows 10' -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-#Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-Start-OSDCloudMFLD -FindImageFile
-#Start-OSDCloudGUI
-#Start-OSDCloud -OSLanguage en-us -OSBuild 21H1 -OSEdition Education -ZTI
+Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
+#Start-OSDCloudMFLD -FindImageFile
 
 if (Get-Volume.usb) {
     Write-Warning "Press Remove Flash Drive"
@@ -1678,6 +1673,4 @@ if (Get-Volume.usb) {
 }
 
 #Restart from WinPE
-#Write-Host  -ForegroundColor Cyan "Restarting in 15 seconds!"
-#Start-Sleep -Seconds 15
 wpeutil reboot
