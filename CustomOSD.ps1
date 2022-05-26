@@ -1660,17 +1660,18 @@ Write-Host  -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 #Write-Host  -ForegroundColor Cyan "Importing the sweet OSD PowerShell Module"
 #Import-Module OSD -Force
 
-#Start OSDCloud ZTI the RIGHT way
-Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
-Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-#Start-OSDCloudMFLD -FindImageFile
-
+#Remove the USB Drive so that it can reboot properly
 if (Get-Volume.usb) {
     Write-Warning "Press Remove Flash Drive"
     while (Get-Volume.usb) {
         Start-Sleep -Seconds 2
     }
 }
+
+#Start OSDCloud ZTI the RIGHT way
+Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
+Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
+#Start-OSDCloudMFLD -FindImageFile
 
 #Restart from WinPE
 wpeutil reboot
