@@ -1656,7 +1656,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
             }
         }
     }
-    
+
     if (!($passwd)) {
         do {
             #Prompt for BIOS Password
@@ -1843,6 +1843,10 @@ pause
 ###################### END UPDATE DELL BIOS ##############################
 ##########################################################################
 
+#Removing OS Files
+if (Test-Path "C:\SODCloud\OS") {
+    Remove-Item "C:\SODCloud\OS" -Recurse -Force
+}
 
 #Restart from WinPE
 wpeutil reboot
