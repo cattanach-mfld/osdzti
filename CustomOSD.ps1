@@ -1651,17 +1651,28 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
         foreach ($drive in $drives) {
             if (Test-Path ($drive + ":\BiosPassword.txt")) {
                 $passwd = ConvertTo-SecureString (Get-Content ($drive + ":\BiosPassword.txt")) -AsPlainText -Force
+                $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
                 Break
             }
         }
     }
+    
     if (!($passwd)) {
-        #Prompt for BIOS Password
-        Write-Host -ForegroundColor Cyan "Enter BIOS Password"
-        $passwd = Read-Host -AsSecureString 'Password'
-    }
+        do {
+            #Prompt for BIOS Password
+            Write-Host -ForegroundColor Cyan "Enter BIOS Password"
+            $passwd = Read-Host -AsSecureString 'Password'
+            $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
 
-    $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
+            Write-Host -ForegroundColor Cyan "Enter BIOS Password Again"
+            $passwd2 = Read-Host -AsSecureString 'Password'
+            $password2 = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd2)).GetNetworkCredential().Password)
+
+            if ($password -ne $password2) {
+                Write-Host -ForegroundColor Yellow "Passwords Do Not Match!"
+            }
+        } until ($password -eq $password2) 
+    }
 
     #Dell BIOS Config
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdzti/main/DellConfigure.zip" -OutFile "X:\OSDCloud\DellConfigure.zip"
@@ -1692,7 +1703,7 @@ Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdi
 ###################### START UPDATE DELL BIOS  ###########################
 ##########################################################################
 
-if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
+if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
     #Set BIOS Root Path
     $path = 'C:\Drivers\BIOS'
     #======================================================================================
