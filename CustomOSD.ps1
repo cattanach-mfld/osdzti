@@ -1838,7 +1838,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
         Write-Host "BIOS is already current.  No Need to update."
     }
 }
-pause
+
 ##########################################################################
 ###################### END UPDATE DELL BIOS ##############################
 ##########################################################################
