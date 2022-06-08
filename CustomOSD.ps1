@@ -1687,12 +1687,12 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 ##########################################################################
 
 #Remove the USB Drive so that it can reboot properly
-if (Get-Volume.usb) {
-    Write-Warning "Press Remove Flash Drive"
-    while (Get-Volume.usb) {
-        Start-Sleep -Seconds 2
-    }
-}
+#if (Get-Volume.usb) {
+#    Write-Warning "Press Remove Flash Drive"
+#    while (Get-Volume.usb) {
+#        Start-Sleep -Seconds 2
+#    }
+#}
 
 #Start OSDCloud ZTI the RIGHT way
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
@@ -1846,6 +1846,14 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
 #Removing OS Files
 if (Test-Path "C:\SODCloud\OS") {
     Remove-Item "C:\SODCloud\OS" -Recurse -Force
+}
+
+#Remove the USB Drive so that it can reboot properly
+if (Get-Volume.usb) {
+    Write-Warning "Press Remove Flash Drive"
+    while (Get-Volume.usb) {
+        Start-Sleep -Seconds 2
+    }
 }
 
 #Restart from WinPE
