@@ -99,6 +99,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 
 
 function Start-OSDCloudMFLD {
+#function Start-OSDCloud {
     <#
     .SYNOPSIS
     Starts the OSDCloud Windows 10 or 11 Build Process from the OSD Module or a GitHub Repository
@@ -695,12 +696,10 @@ function Start-OSDCloudMFLD {
 
 
 
-
-
-
     #=================================================
-    #	Create Hashtable
-    #=================================================
+    #   OSDCloud.ps1 Function goes below
+
+    #function Invoke-OSDCloud {
     $Global:OSDCloud = $null
     $Global:OSDCloud = [ordered]@{
         AutopilotJsonChildItem = $null
