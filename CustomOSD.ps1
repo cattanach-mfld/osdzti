@@ -6,6 +6,8 @@ $mfldwinver = "Windows 11"
 #    $mfldwinver = "Windows 10"
 #}
 
+$wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
+
 function Start-OSDCloudMFLD {
     <#
     .SYNOPSIS
@@ -2133,7 +2135,8 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 
 #Start OSDCloud ZTI the RIGHT way
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
-Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
+Start-OSDCloudMFLD -ImageFileUrl $wimUrl -ZTI 
+#Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
 #Start-OSDCloudMFLD -FindImageFile
 
 ##########################################################################
