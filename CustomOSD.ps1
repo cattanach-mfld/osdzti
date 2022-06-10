@@ -1,12 +1,14 @@
-$mfldwinver = "Windows 11"
-#$reply = Read-Host "Windows 11?[y/n]"
-#if ( $reply -match "[yY]" ) { 
-#    $mfldwinver = "Windows 11"
-#} else {
-#    $mfldwinver = "Windows 10"
-#}
+#$mfldwinver = "Windows 11"
+$reply = Read-Host "Shared Device?[y/n]"
+if ( $reply -match "[yY]" ) { 
+    #$mfldwinver = "Windows 11"
+    $wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
+} else {
+    #$mfldwinver = "Windows 10"
+    $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
+}
 
-$wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
+
 
 function Start-OSDCloudMFLD {
     <#
