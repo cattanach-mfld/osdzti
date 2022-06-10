@@ -2,7 +2,7 @@ Write-Host -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 
 
 ##########################################################################
-###################### SET DELL BIOS INFO ################################
+###################### SET DELL BIOS PASS ################################
 ##########################################################################
 
 if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
@@ -16,7 +16,36 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
             }
         }
     }
+}
 
+##########################################################################
+###################### END DELL BIOS PASS ################################
+##########################################################################
+
+#$mfldwinver = "Windows 11"
+$reply = Read-Host "Shared Device?[y/n]"
+if ( $reply -match "[yY]" ) { 
+    #$mfldwinver = "Windows 10"
+    $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
+} else {
+    #$mfldwinver = "Windows 11"
+    $wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
+}
+
+#Remove the USB Drive so that it can reboot properly
+if (Get-Volume.usb) {
+    Write-Warning "Press Remove Flash Drive"
+    while (Get-Volume.usb) {
+        Start-Sleep -Seconds 2
+    }
+}
+
+
+##########################################################################
+###################### SET DELL BIOS INFO ################################
+##########################################################################
+
+if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
     if (!($passwd)) {
         do {
             #Prompt for BIOS Password
@@ -46,23 +75,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 ###################### END DELL BIOS INFO ################################
 ##########################################################################
 
-#$mfldwinver = "Windows 11"
-$reply = Read-Host "Shared Device?[y/n]"
-if ( $reply -match "[yY]" ) { 
-    #$mfldwinver = "Windows 10"
-    $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
-} else {
-    #$mfldwinver = "Windows 11"
-    $wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
-}
 
-#Remove the USB Drive so that it can reboot properly
-if (Get-Volume.usb) {
-    Write-Warning "Press Remove Flash Drive"
-    while (Get-Volume.usb) {
-        Start-Sleep -Seconds 2
-    }
-}
 
 
 
