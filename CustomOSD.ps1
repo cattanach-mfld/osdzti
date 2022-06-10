@@ -2201,7 +2201,6 @@ exit
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
 Start-OSDCloudMFLD -ImageFileUrl $wimUrl -ZTI 
 #Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
-#Start-OSDCloudMFLD -FindImageFile
 
 ##########################################################################
 ###################### START UPDATE DELL BIOS  ###########################
@@ -2233,8 +2232,6 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
     #Create Folders if needed
     $DellBiosRoot = $Path
     $DellBiosBin = Join-Path $DellBiosRoot "Bin"
-    #Write-Host "DellBios Root: $DellBiosRoot" -ForegroundColor Cyan
-    #Write-Host "DellBios Bin: $DellBiosBin" -ForegroundColor Cyan
     New-Item -Path $DellBiosBin -ItemType Directory
     #======================================================================================
     #Set Dell Catalog Location
@@ -2242,10 +2239,6 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
     $DellCatalogPcUrl = "http://downloads.dell.com/catalog/CatalogPC.cab"
     $DellCatalogPcCab = Join-Path $DellBiosBin ($DellCatalogPcUrl | Split-Path -Leaf)
     $DellCatalogPcXml = Join-Path $DellBiosBin "CatalogPC.xml"
-    #Write-Host "Dell Downloads URL: $DellDownloadsUrl" -ForegroundColor Cyan
-    #Write-Host "Dell Catalog URL: $DellCatalogPcUrl" -ForegroundColor Cyan
-    #Write-Host "Dell Catalog CAB: $DellCatalogPcCab" -ForegroundColor Cyan
-    #Write-Host "Dell Catalog XML: $DellCatalogPcXml" -ForegroundColor Cyan
     #======================================================================================
     #Download Cab File from Dell
     Write-Host "Downloading $DellCatalogPcUrl ..." -ForegroundColor Green
@@ -2268,8 +2261,6 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
     if (!( test-path $DellCatalogPcXml)) { 
         Write-Host "Could not expand required Dell Update Catalog ... Exiting" -ForegroundColor Red
         Return
-    } else {
-        Write-Host "Success!"
     }
     #======================================================================================
     #Get XML File and filter to Only BIOS Updates
@@ -2298,7 +2289,6 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
     @{Label="SupportedModel";Expression={($_.SupportedSystems.Brand.Model.Display.'#cdata-section'.Trim() | Select-Object -unique)};},
     @{Label="SupportedSystemID";Expression={($_.SupportedSystems.Brand.Model.systemID.Trim() | Select-Object -unique)};},
     @{Label="DownloadURL";Expression={-join ($DellDownloadsUrl, $_.path)};}
-    Write-Host "Success!"
     #======================================================================================
     #Remove T0N11 32
     $DellUpdateList = $DellUpdateList | Where-Object {$_.DownloadURL -NotLike "*WN32*"}
@@ -2312,13 +2302,10 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
         #Download Flash64W from github
         $DellFlash64wUrl = 'https://raw.githubusercontent.com/cattanach-mfld/osdzti/main/Flash64W.exe'
         $DellFlash64wExe = Join-Path $DellBiosRoot "Flash64W.exe"
-        #Write-Host "Dell Flash64 URL: $DellFlash64wUrl" -ForegroundColor Cyan
-        #Write-Host "Dell Flash64 Exe: $DellFlash64wExe" -ForegroundColor Cyan
         #======================================================================================
         Write-Host "Downloading $DellFlash64wUrl ..." -ForegroundColor Green
         try {
             Invoke-WebRequest $DellFlash64wUrl -OutFile $DellFlash64wExe
-            Write-Host "Success!"
         } catch { 
             Write-Host "Download Failed!" -ForegroundColor Red
         }
@@ -2328,13 +2315,10 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell" -and $password) {
         Write-Host "Downloading: $SourceFile" -ForegroundColor Green
 
         $DownloadFile = Join-Path $DellBiosRoot (split-path -leaf $DellUpdateFile.DownloadURL.Trim())
-        Write-Host "$DownloadFile" -ForegroundColor Green
-        
         Invoke-WebRequest $SourceFile -OutFile $DownloadFile
         
         #If download file exists, run it
         if (Test-Path $DownloadFile) {
-            Write-Host "Success!"
             Write-Host "Executing (Silent): $DellFlash64wExe /b=`"$DownloadFile`"" -ForegroundColor Green
             Start-Process -FilePath $DellFlash64wExe -ArgumentList "/b=`"$DownloadFile`"","/s","/f","/p=`"$password`"" -Wait
         }
