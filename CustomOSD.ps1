@@ -1,15 +1,5 @@
 Write-Host -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 
-#$mfldwinver = "Windows 11"
-$reply = Read-Host "Shared Device?[y/n]"
-if ( $reply -match "[yY]" ) { 
-    #$mfldwinver = "Windows 11"
-    $wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
-} else {
-    #$mfldwinver = "Windows 10"
-    $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
-}
-
 
 ##########################################################################
 ###################### SET DELL BIOS INFO ################################
@@ -55,6 +45,16 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 ##########################################################################
 ###################### END DELL BIOS INFO ################################
 ##########################################################################
+
+#$mfldwinver = "Windows 11"
+$reply = Read-Host "Shared Device?[y/n]"
+if ( $reply -match "[yY]" ) { 
+    #$mfldwinver = "Windows 11"
+    $wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
+} else {
+    #$mfldwinver = "Windows 10"
+    $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
+}
 
 #Remove the USB Drive so that it can reboot properly
 if (Get-Volume.usb) {
@@ -684,7 +684,7 @@ function Start-OSDCloudMFLD {
 
 
 
-    
+
     #=================================================
     #	Create Hashtable
     #=================================================
