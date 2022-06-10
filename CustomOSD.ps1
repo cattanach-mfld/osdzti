@@ -1,3 +1,5 @@
+Write-Host -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
+
 #$mfldwinver = "Windows 11"
 $reply = Read-Host "Shared Device?[y/n]"
 if ( $reply -match "[yY]" ) { 
@@ -7,6 +9,79 @@ if ( $reply -match "[yY]" ) {
     #$mfldwinver = "Windows 10"
     $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
 }
+
+
+##########################################################################
+###################### SET DELL BIOS INFO ################################
+##########################################################################
+
+if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
+    if (Get-Volume.usb) {
+        $drives = (Get-Volume.usb).DriveLetter
+        foreach ($drive in $drives) {
+            if (Test-Path ($drive + ":\BiosPassword.txt")) {
+                $passwd = ConvertTo-SecureString (Get-Content ($drive + ":\BiosPassword.txt")) -AsPlainText -Force
+                $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
+                Break
+            }
+        }
+    }
+
+    if (!($passwd)) {
+        do {
+            #Prompt for BIOS Password
+            Write-Host -ForegroundColor Cyan "Enter BIOS Password"
+            $passwd = Read-Host -AsSecureString 'Password'
+            $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
+
+            Write-Host -ForegroundColor Cyan "Enter BIOS Password Again"
+            $passwd2 = Read-Host -AsSecureString 'Password'
+            $password2 = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd2)).GetNetworkCredential().Password)
+
+            if ($password -ne $password2) {
+                Write-Host -ForegroundColor Yellow "Passwords Do Not Match!"
+            }
+        } until ($password -eq $password2) 
+    }
+
+    #Dell BIOS Config
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdzti/main/DellConfigure.zip" -OutFile "X:\OSDCloud\DellConfigure.zip"
+    Expand-Archive "X:\OSDCloud\DellConfigure.zip" "X:\OSDCloud"
+
+    & "X:\OSDCloud\DellConfigure\cctk.exe" --setuppwd=$password
+    & "X:\OSDCloud\DellConfigure\cctk.exe" -i "X:\OSDCloud\DellConfigure\multiplatform_201906070913.cctk" --valsetuppwd=$password
+}
+
+##########################################################################
+###################### END DELL BIOS INFO ################################
+##########################################################################
+
+#Remove the USB Drive so that it can reboot properly
+if (Get-Volume.usb) {
+    Write-Warning "Press Remove Flash Drive"
+    while (Get-Volume.usb) {
+        Start-Sleep -Seconds 2
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2080,60 +2155,24 @@ exit
 
 
 
-Write-Host -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 
-##########################################################################
-###################### SET DELL BIOS INFO ################################
-##########################################################################
 
-if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
-    if (Get-Volume.usb) {
-        $drives = (Get-Volume.usb).DriveLetter
-        foreach ($drive in $drives) {
-            if (Test-Path ($drive + ":\BiosPassword.txt")) {
-                $passwd = ConvertTo-SecureString (Get-Content ($drive + ":\BiosPassword.txt")) -AsPlainText -Force
-                $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
-                Break
-            }
-        }
-    }
 
-    if (!($passwd)) {
-        do {
-            #Prompt for BIOS Password
-            Write-Host -ForegroundColor Cyan "Enter BIOS Password"
-            $passwd = Read-Host -AsSecureString 'Password'
-            $password = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd)).GetNetworkCredential().Password)
 
-            Write-Host -ForegroundColor Cyan "Enter BIOS Password Again"
-            $passwd2 = Read-Host -AsSecureString 'Password'
-            $password2 = ((New-Object System.Management.Automation.PSCredential('dummy',$passwd2)).GetNetworkCredential().Password)
 
-            if ($password -ne $password2) {
-                Write-Host -ForegroundColor Yellow "Passwords Do Not Match!"
-            }
-        } until ($password -eq $password2) 
-    }
 
-    #Dell BIOS Config
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/cattanach-mfld/osdzti/main/DellConfigure.zip" -OutFile "X:\OSDCloud\DellConfigure.zip"
-    Expand-Archive "X:\OSDCloud\DellConfigure.zip" "X:\OSDCloud"
 
-    & "X:\OSDCloud\DellConfigure\cctk.exe" --setuppwd=$password
-    & "X:\OSDCloud\DellConfigure\cctk.exe" -i "X:\OSDCloud\DellConfigure\multiplatform_201906070913.cctk" --valsetuppwd=$password
-}
 
-##########################################################################
-###################### END DELL BIOS INFO ################################
-##########################################################################
 
-#Remove the USB Drive so that it can reboot properly
-if (Get-Volume.usb) {
-    Write-Warning "Press Remove Flash Drive"
-    while (Get-Volume.usb) {
-        Start-Sleep -Seconds 2
-    }
-}
+
+
+
+
+
+
+
+
+
 
 #Start OSDCloud ZTI the RIGHT way
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
