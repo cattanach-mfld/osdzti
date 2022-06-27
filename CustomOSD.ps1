@@ -29,7 +29,7 @@ if ( $reply -match "[yY]" ) {
     $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
 } else {
     #$mfldwinver = "Windows 11"
-    $wimUrl = 'https://wim.marshfieldschools.org/install-W11-21H1-22-05-1-Windows-10-Education.wim'
+    $wimUrl = 'https://wim.marshfieldschools.org/Win11-2022-06-24.wim'
 }
 
 #Remove the USB Drive so that it can reboot properly
