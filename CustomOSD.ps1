@@ -89,7 +89,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 
 #Start OSDCloud ZTI the RIGHT way
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
-Start-OSDCloud -ImageFileUrl $wimUrl -ZTI -Restart $false
+Start-OSDCloud -ImageFileUrl $wimUrl -ZTI
 #Start-OSDCloudMFLD -OSVersion $mfldwinver -OSLanguage en-us -OSBuild 21H2 -OSEdition Education -ZTI
 
 ##########################################################################
