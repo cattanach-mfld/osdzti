@@ -34,7 +34,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 
 #Remove the USB Drive so that it can reboot properly
 if (Get-Volume.usb) {
-    Write-Warning "Press Remove Flash Drive"
+    Write-Warning "Please Remove Flash Drive"
     while (Get-Volume.usb) {
         Start-Sleep -Seconds 2
     }
@@ -229,7 +229,7 @@ if (Test-Path "C:\OSDCloud\OS") {
 
 #Remove the USB Drive so that it can reboot properly
 if (Get-Volume.usb) {
-    Write-Warning "Press Remove Flash Drive"
+    Write-Warning "Please Remove Flash Drive"
     while (Get-Volume.usb) {
         Start-Sleep -Seconds 2
     }
