@@ -29,7 +29,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 #    $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
 #} else {
     #$mfldwinver = "Windows 11"
-    $wimUrl = 'https://wim.marshfieldschools.org/Windows11_22H2_EDU.wim'
+    #$wimUrl = 'https://wim.marshfieldschools.org/Windows11_22H2_EDU.wim'
 #}
 
 #Remove the USB Drive so that it can reboot properly
@@ -91,7 +91,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
 #Start-OSDCloud -ImageFileUrl $wimUrl -ZTI
 #Start-OSDCloudMFLD -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 22H2 -OSEdition Education -ZTI
-Start-OSDCloud -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 22H2 -OSEdition Education -ZTI
+Start-OSDCloud -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 23H2 -OSEdition Education -ZTI
 
 ##########################################################################
 ###################### START UPDATE DELL BIOS  ###########################
