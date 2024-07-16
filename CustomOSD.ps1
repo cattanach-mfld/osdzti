@@ -1,6 +1,14 @@
 Write-Host -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 
 
+# Set OSDCloud Defaults
+$Global:MyOSDCloud = [ordered]@{
+    WindowsUpdate = [bool]$true
+    WindowsUpdateDrivers = [bool]$true
+    WindowsDefenderUpdate = [bool]$true
+    SetTimeZone = [bool]$true
+}
+
 ##########################################################################
 ###################### SET DELL BIOS PASS ################################
 ##########################################################################
@@ -22,16 +30,6 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 ###################### END DELL BIOS PASS ################################
 ##########################################################################
 
-#$mfldwinver = "Windows 11"
-#$reply = Read-Host "Shared Device?[y/n]"
-#if ( $reply -match "[yY]" ) { 
-    #$mfldwinver = "Windows 10"
-#    $wimUrl = 'https://wim.marshfieldschools.org/install_21H1-1-Windows-10-Education.wim'
-#} else {
-    #$mfldwinver = "Windows 11"
-    #$wimUrl = 'https://wim.marshfieldschools.org/Windows11_22H2_EDU.wim'
-#}
-
 #Remove the USB Drive so that it can reboot properly
 if (Get-Volume.usb) {
     Write-Warning "Please Remove Flash Drive"
@@ -39,7 +37,6 @@ if (Get-Volume.usb) {
         Start-Sleep -Seconds 2
     }
 }
-
 
 ##########################################################################
 ###################### SET DELL BIOS INFO ################################
