@@ -8,6 +8,7 @@ $Global:MyOSDCloud = [ordered]@{
     WindowsUpdateDrivers = [bool]$false
     WindowsDefenderUpdate = [bool]$true
     SetTimeZone = [bool]$true
+    updateNetworkDrivers = [bool]$false
 }
 
 ##########################################################################
