@@ -90,7 +90,7 @@ if ((Get-MyComputerManufacturer -Brief) -eq "Dell") {
 Write-Host  -ForegroundColor Cyan "Start OSDCloud with Marshfield Parameters"
 #Start-OSDCloud -ImageFileUrl $wimUrl -ZTI
 #Start-OSDCloudMFLD -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 22H2 -OSEdition Education -ZTI
-Start-OSDCloud -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 23H2 -OSEdition Education -ZTI
+Start-OSDCloud -OSVersion "Windows 11" -OSLanguage en-us -OSBuild 24H2 -OSEdition Education -ZTI
 
 ##########################################################################
 ###################### START UPDATE DELL BIOS  ###########################
