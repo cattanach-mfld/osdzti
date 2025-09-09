@@ -3,7 +3,7 @@ Write-Host -ForegroundColor Cyan "Starting Marshfield's Custom OSDCloud ..."
 
 # Set OSDCloud Defaults
 $Global:MyOSDCloud = [ordered]@{
-    WindowsUpdate = [bool]$true
+    WindowsUpdate = [bool]$false
     #WindowsUpdateDrivers = [bool]$true
     WindowsUpdateDrivers = [bool]$false
     WindowsDefenderUpdate = [bool]$true
